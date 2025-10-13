@@ -94,5 +94,5 @@ while read -r input; do
         continue
     fi
     echo -e "\033[0;32m[o]\033[0m Installing ${input} from script..."
-    bash ./extra/${input}.sh
+    bash ./extras/${input}.sh
 done < <(cut -d '#' -f 1 "${listPkg}")
