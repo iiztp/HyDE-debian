@@ -29,6 +29,7 @@ libtomlplusplus-dev
 libinput-dev
 libgio-2.0-dev
 gir1.2-graphene-1.0
+gir1.2-gtk-4.0
 libgl1-mesa-dev
 libglvnd-core-dev
 libglvnd-dev
