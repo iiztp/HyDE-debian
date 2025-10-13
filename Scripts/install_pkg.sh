@@ -37,12 +37,14 @@ case ${aptwarning} in
     y) ;;
     *) exit ;;
 esac
-listPkg="${1:-"${scrDir}/pkg_deps.lst"}"
+
+listPkg="${scrDir}/pkg_deps.lst"
 echo ""
 echo -e "\033[0;35m[o]\033[0m Installing dependencies..."
 echo ""
 install_from_list $listPkg
-listPkg="${1:-"${scrDir}/pkg_core.lst"}"
+
+listPkg="${scrDir}/pkg_core.lst"
 echo ""
 echo -e "\033[0;35m[o]\033[0m Installing core packages..."
 echo ""

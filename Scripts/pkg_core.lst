@@ -29,7 +29,6 @@ xdg-user-dirs                                          # Manage user directories
 parallel                                               # for parallel processing
 jq                                                     # for json processing
 imagemagick                                            # for image processing
-qt5-imageformats                                       # for dolphin image thumbnails
 ffmpegthumbs                                           # for dolphin video thumbnails
 kde-cli-tools                                          # for dolphin file type defaults
 libnotify                                              # for notifications
@@ -37,7 +36,6 @@ noto-fonts-emoji                                       # emoji font
 bibata-cursor-theme
 gir1.2-playerctl-2.0
 inotify-tools
-ffmpegthumbs
 kde-cli-tools
 
 # --------------------------------------------------- // Theming
