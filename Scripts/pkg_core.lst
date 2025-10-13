@@ -31,7 +31,7 @@ jq                                                     # for json processing
 imagemagick                                            # for image processing
 ffmpegthumbs                                           # for dolphin video thumbnails
 kde-cli-tools                                          # for dolphin file type defaults
-noto-fonts-emoji                                       # emoji font
+fonts-noto-color-emoji                                 # emoji font
 bibata-cursor-theme
 gir1.2-playerctl-2.0
 inotify-tools
