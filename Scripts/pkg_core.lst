@@ -35,7 +35,6 @@ fonts-noto-color-emoji                                 # emoji font
 bibata-cursor-theme
 gir1.2-playerctl-2.0
 inotify-tools
-kde-cli-tools
 
 # --------------------------------------------------- // Theming
 nwg-look                                               # gtk configuration tool
@@ -72,7 +71,6 @@ dolphin                                                # kde file manager
 ark                                                    # kde file archiver
 unzip                                                  # extracting zip files
 neovim                                                 # terminal text editor
-code                                                   # ide text editor
 nwg-displays                                           # monitor management utility
 fzf                                                    # Command-line fuzzy finder
 
