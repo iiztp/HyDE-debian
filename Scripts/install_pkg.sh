@@ -12,84 +12,83 @@ if ! source "${scrDir}/global_fn.sh"; then
     exit 1
 fi
 
-flg_DryRun=${flg_DryRun:-0}
-export log_section="package"
-
-"${scrDir}/install_aur.sh" "${getAur}" 2>&1
-chk_list "aurhlpr" "${aurList[@]}"
-listPkg="${1:-"${scrDir}/pkg_core.lst"}"
-archPkg=()
-aurhPkg=()
-ofs=$IFS
-IFS='|'
-
-#-----------------------------#
-# remove blacklisted packages #
-#-----------------------------#
-if [ -f "${scrDir}/pkg_black.lst" ]; then
-    grep -v -f <(grep -v '^#' "${scrDir}/pkg_black.lst" | sed 's/#.*//;s/ //g;/^$/d') <(sed 's/#.*//' "${scrDir}/install_pkg.lst") >"${scrDir}/install_pkg_filtered.lst"
-    mv "${scrDir}/install_pkg_filtered.lst" "${scrDir}/install_pkg.lst"
-fi
-
-while read -r pkg deps; do
-    pkg="${pkg// /}"
-    if [ -z "${pkg}" ]; then
-        continue
-    fi
-
-    if [ -n "${deps}" ]; then
-        deps="${deps%"${deps##*[![:space:]]}"}"
-        while read -r cdep; do
-            pass=$(cut -d '#' -f 1 "${listPkg}" | awk -F '|' -v chk="${cdep}" '{if($1 == chk) {print 1;exit}}')
-            if [ -z "${pass}" ]; then
-                if pkg_installed "${cdep}"; then
-                    pass=1
-                else
-                    break
-                fi
-            fi
-        done < <(xargs -n1 <<<"${deps}")
-
-        if [[ ${pass} -ne 1 ]]; then
-            print_log -warn "missing" "dependency [ ${deps} ] for ${pkg}..."
+install_from_list() {
+    local listPkg="$1"
+    while read -r pkg; do
+        pkg="${pkg// /}"
+        if [[ -z "${pkg}" ]]; then
             continue
         fi
-    fi
+        if pkg_installed "${pkg}"; then
+            echo -e "\033[0;33m[skip]\033[0m ${pkg} is already installed..."
+        elif pkg_available "${pkg}"; then
+            echo -e "\033[0;32m[o]\033[0m Installing ${pkg} from official debian repo..."
+            sudo apt install -y --force-yes "${pkg}" &>/dev/null
+        else
+            echo "Error: unknown package ${pkg}..."
+        fi
+    done < <(cut -d '#' -f 1 "${listPkg}")
+}
 
-    if pkg_installed "${pkg}"; then
-        print_log -y "[skip] " "${pkg}"
-    elif pkg_available "${pkg}"; then
-        repo=$(pacman -Si "${pkg}" | awk -F ': ' '/Repository / {print $2}' | tr '\n' ' ')
-        print_log -b "[queue] " "${pkg}" -b " :: " -g "${repo}"
-        archPkg+=("${pkg}")
-    elif aur_available "${pkg}"; then
-        print_log -b "[queue] " "${pkg}" -b " :: " -g "aur"
-        aurhPkg+=("${pkg}")
-    else
-        print_log -r "[error] " "unknown package ${pkg}..."
-    fi
-done < <(cut -d '#' -f 1 "${listPkg}")
+# Install dependencies and softwares
+echo -e "\033[0;31mNote: Installing with APT in CLI is at risks, be sure you know what you do before continuing.\033[0m You can install the packages manually and go back to this script if needed."
+read -p " :: Press y to continue : " aptwarning
+case ${aptwarning} in
+    y) ;;
+    *) exit ;;
+esac
+listPkg="${1:-"${scrDir}/pkg_deps.lst"}"
+echo ""
+echo -e "\033[0;35m[o]\033[0m Installing dependencies..."
+echo ""
+install_from_list $listPkg
+listPkg="${1:-"${scrDir}/pkg_core.lst"}"
+echo ""
+echo -e "\033[0;35m[o]\033[0m Installing core packages..."
+echo ""
+install_from_list $listPkg
+
+# Installing Rust
+if ! pkg_installed "rustup"; then
+    echo -e "\033[0;35m[o]\033[0m Installing Rust..."
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    source $HOME/.cargo/env
+else
+    echo -e "\033[0;33m[skip]\033[0m Rust is already installed..."
+fi
 
 IFS=${ofs}
 
-install_packages() {
-    local -n pkg_array=$1
-    local pkg_type=$2
-    local install_cmd=$3
-
-    if [[ ${#pkg_array[@]} -gt 0 ]]; then
-        print_log -b "[install] " "$pkg_type packages..."
-        if [ "${flg_DryRun}" -eq 1 ]; then
-            for pkg in "${pkg_array[@]}"; do
-                print_log -b "[pkg] " "${pkg}"
-            done
-        else
-            $install_cmd ${use_default:+"$use_default"} -S "${pkg_array[@]}"
-        fi
+# Install git packages
+listPkg="${1:-"${scrDir}/install_git.lst"}"
+while read -r input; do
+    input="${input// /}"
+    if [ -z "${input}" ]; then
+        continue
     fi
-}
-
-echo ""
-install_packages archPkg "arch" "sudo pacman"
-echo ""
-install_packages aurhPkg "aur" "${aurhlpr}"
+    prefix=$(echo "$input" | cut -d':' -f1)
+    gitpkg=$(echo "$input" | cut -d':' -f2-)
+    echo -e "\033[0;32m[o]\033[0m Installing ${gitpkg} from git repo..."
+    pkgname=$(echo "${gitpkg}" | sed 's|.*/\([^/]*\)/\([^/]*\)\.git|\1_\2|')
+    if [ ! -d "${pkgname}" ] ; then
+        git clone --depth 1 --recursive ${gitpkg} ${pkgname}
+    else
+        cd "${pkgname}"
+        git pull --depth 1 ${gitpkg}
+        git submodule update --recursive
+        cd ..
+    fi
+    cd "${pkgname}"
+    if [ "$prefix" == "1" ]; then
+        install_git_1 ${pkgname}
+    elif [ "$prefix" == "2" ]; then
+        install_git_2 ${pkgname}
+    elif [ "$prefix" == "3" ]; then
+        install_git_3 ${pkgname}
+    elif [ "$prefix" == "4" ]; then
+        install_git_4 ${pkgname}
+    else
+        echo -e "\033[0;31mUnknown installation for ${gitpkg}\033[0m"
+    fi
+    cd ..
+done < <(cut -d '#' -f 1 "${listPkg}")
