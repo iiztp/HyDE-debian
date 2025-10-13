@@ -3,7 +3,7 @@
 # wallbash script can source this script to resolve the paths cleanly on a separate shell
 python_initialized() {
 
-    python "${LIB_DIR}/hyde/pyutils/pip_env.py" rebuild
+    python3 "${LIB_DIR}/hyde/pyutils/pip_env.py" rebuild
 }
 
 python_activate() {
@@ -423,7 +423,7 @@ run_command() {
         # Try .py extension
         elif [[ -f "$dir/${1}.py" ]]; then
             python_activate
-            exec python "$dir/${1}.py" "${@:2}"
+            exec python3 "$dir/${1}.py" "${@:2}"
         # Try exact name (executable)
         elif [[ -f "$dir/${1}" && -x "$dir/${1}" ]]; then
             exec "$dir/${1}" "${@:2}"
