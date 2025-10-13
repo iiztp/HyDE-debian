@@ -16,7 +16,6 @@ shlList=("fish")
 export cloneDir
 export confDir
 export cacheDir
-export aurList
 export shlList
 
 pkg_installed() {

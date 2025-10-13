@@ -56,7 +56,7 @@ if ! pkg_installed "rustup"; then
     echo -e "\033[0;35m[o]\033[0m Installing Rust..."
     echo ""
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-    source $HOME/.cargo/env
+    source "$HOME/.cargo/env"
 else
     echo -e "\033[0;33m[skip]\033[0m Rust is already installed..."
 fi
