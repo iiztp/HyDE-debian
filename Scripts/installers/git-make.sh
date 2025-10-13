@@ -12,6 +12,6 @@ cd "${name}"
 git checkout ${version}
 
 make build
-sudo source "$HOME/.cargo/env" && sudo make install
+sudo -E make install
 
 cd ..
