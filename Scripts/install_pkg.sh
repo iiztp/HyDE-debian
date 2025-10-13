@@ -74,10 +74,10 @@ while read -r input; do
         continue
     fi
 
-    name=$(echo "$input" | cut -d':' -f1)
-    script=$(echo "$input" | cut -d':' -f2-)
-    version=$(echo "$input" | cut -d':' -f3-)
-    argument=$(echo "$input" | cut -d':' -f4-)
+    name=$(echo "$input" | cut -d'|' -f1)
+    script=$(echo "$input" | cut -d'|' -f2-)
+    version=$(echo "$input" | cut -d'|' -f3-)
+    argument=$(echo "$input" | cut -d'|' -f4-)
 
     echo -e "\033[0;32m[o]\033[0m Installing manually ${name} with ${script}..."
     ./installers/${script}.sh ${name} ${argument} ${version}
