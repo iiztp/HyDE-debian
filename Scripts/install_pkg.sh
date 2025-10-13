@@ -77,35 +77,12 @@ while read -r input; do
 done < <(cut -d '#' -f 1 "${listPkg}")
 
 # Install extra
-listPkg="${1:-"${scrDir}/install_git.lst"}"
+listPkg="${1:-"${scrDir}/pkg_extra.lst"}"
 while read -r input; do
     input="${input// /}"
     if [ -z "${input}" ]; then
         continue
     fi
-    prefix=$(echo "$input" | cut -d':' -f1)
-    gitpkg=$(echo "$input" | cut -d':' -f2-)
-    echo -e "\033[0;32m[o]\033[0m Installing ${gitpkg} from git repo..."
-    pkgname=$(echo "${gitpkg}" | sed 's|.*/\([^/]*\)/\([^/]*\)\.git|\1_\2|')
-    if [ ! -d "${pkgname}" ] ; then
-        git clone --depth 1 --recursive ${gitpkg} ${pkgname}
-    else
-        cd "${pkgname}"
-        git pull --depth 1 ${gitpkg}
-        git submodule update --recursive
-        cd ..
-    fi
-    cd "${pkgname}"
-    if [ "$prefix" == "1" ]; then
-        install_git_1 ${pkgname}
-    elif [ "$prefix" == "2" ]; then
-        install_git_2 ${pkgname}
-    elif [ "$prefix" == "3" ]; then
-        install_git_3 ${pkgname}
-    elif [ "$prefix" == "4" ]; then
-        install_git_4 ${pkgname}
-    else
-        echo -e "\033[0;31mUnknown installation for ${gitpkg}\033[0m"
-    fi
-    cd ..
+    echo -e "\033[0;32m[o]\033[0m Installing ${input} from script..."
+    ./extra/${input}.sh
 done < <(cut -d '#' -f 1 "${listPkg}")
