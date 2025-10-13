@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Copyright © Scott Stevenson <scott@stevenson.io>
 #
 # Permission to use, copy, modify, and/or distribute this software for

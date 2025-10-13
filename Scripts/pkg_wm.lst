@@ -1,0 +1,26 @@
+# --------------------------------------------------- // Window Manager
+rust|curl||--proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs
+hyprwayland-scanner|git-cmake|v0.4.5|https://github.com/hyprwm/hyprwayland-scanner.git
+hyprutils|git-cmake|v0.8.4|https://github.com/hyprwm/hyprutils.git
+hyprlang|git-cmake|v0.6.4|https://github.com/hyprwm/hyprlang.git
+hyprland-protocols|git-meson|v0.6.4|https://github.com/hyprwm/hyprland-protocols.git
+hyprgraphics|git-cmake|v0.1.6|https://github.com/hyprwm/hyprgraphics.git
+hyprcursor|git-cmake|v0.1.13|https://github.com/hyprwm/hyprcursor.git
+hyprpicker|git-cmake|v0.4.5|https://github.com/hyprwm/hyprpicker.git
+aquamarine|git-cmake|v0.9.5|https://github.com/hyprwm/aquamarine.git
+hyprland|git-cmake|v0.51.1|https://github.com/hyprwm/hyprland.git
+hyprlock|git-cmake|v0.9.2|https://github.com/hyprwm/hyprlock.git
+dunst|apt||                                            # notification daemon
+waybar|apt||                                           # system bar
+swww|rust|v0.11.2|https://github.com/LGFae/swww.git    # wallpaper
+wlogout|apt||                                          # logout menu
+grim|git-meson|v1.5.0|https://gitlab.freedesktop.org/emersion/grim.git
+grimblast|grimblast|main|https://github.com/hyprwm/contrib.git
+slurp|apt||                                            # region select for screenshot/screenshare
+satty|make|v0.20.0|https://github.com/gabm/Satty.git   # Modern Screenshot Annotation
+cliphist|make|v0.7.0|https://github.com/sentriz/cliphist.git
+wl-clip-persist|rust|v0.5.0|https://github.com/Linus789/wl-clip-persist.git
+sddm-theme-debian-breeze|sddm||                        # display manager for KDE plasma
+hyprland-qtutils|git-cmake|v0.1.5|https://github.com/hyprwm/hyprland-qtutils.git
+rofi|git-meson|2.0.0|https://github.com/davatorium/rofi.git
+fish|fish|4.1.2|https://github.com/fish-shell/fish-shell.git

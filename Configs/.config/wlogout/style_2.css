@@ -1,4 +1,5 @@
 * {
+    transition: 20ms;
     background-image: none;
     font-size: ${fntSize}px;
 }

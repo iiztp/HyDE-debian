@@ -11,9 +11,7 @@ cloneDir="$(dirname "${scrDir}")" # fallback, we will use CLONE_DIR now
 cloneDir="${CLONE_DIR:-${cloneDir}}"
 confDir="${XDG_CONFIG_HOME:-$HOME/.config}"
 cacheDir="${XDG_CACHE_HOME:-$HOME/.cache}/hyde"
-aurList=("yay" "paru")
 shlList=("zsh" "fish")
-pacmanCmd=${cloneDir}/Configs/.local/lib/hyde/pm.sh
 
 export cloneDir
 export confDir
@@ -22,13 +20,18 @@ export aurList
 export shlList
 
 pkg_installed() {
-    local PkgIn=$1
-
-    if pacman -Q "${PkgIn}" &>/dev/null; then
+    local PkgIn="$1"
+    # Check if the package is installed using dpkg-query
+    if dpkg-query -W -f='${Status}' "${PkgIn}" 2>/dev/null | grep -q 'install ok installed'; then
         return 0
-    else
-        return 1
     fi
+    
+    # Check if the command is available
+    if command -v "${PkgIn}" &> /dev/null; then
+        return 0
+    fi
+    
+    return 1
 }
 
 chk_list() {
@@ -48,19 +51,7 @@ chk_list() {
 
 pkg_available() {
     local PkgIn=$1
-
-    if ${pacmanCmd} query "${PkgIn}" &>/dev/null; then
-        return 0
-    else
-        return 1
-    fi
-}
-
-aur_available() {
-    local PkgIn=$1
-
-    # shellcheck disable=SC2154
-    if ${pacmanCmd} info "${PkgIn}" &>/dev/null; then
+    if apt list "${PkgIn}" &> /dev/null; then
         return 0
     else
         return 1
@@ -102,6 +93,7 @@ prompt_timer() {
     echo ""
     set -e
 }
+
 print_log() {
     local executable="${0##*/}"
     local logFile="${cacheDir}/logs/${HYDE_LOG}/${executable}.log"
