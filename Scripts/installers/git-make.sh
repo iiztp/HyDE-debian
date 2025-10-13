@@ -7,7 +7,7 @@ version=$3
 if [ ! -d "${name}" ] ; then
     git clone --depth 1 --branch ${version} --recursive ${link} ${name}
 fi
-
+source $HOME/.cargo/env
 cd "${name}"
 git checkout ${version}
 
