@@ -32,6 +32,7 @@ libgraphene-1.0-dev
 libgtk-4-dev
 libgl1-mesa-dev
 libglvnd-core-dev
+libssl-dev
 libglvnd-dev
 libgtk-layer-shell-dev
 libjxl-dev
