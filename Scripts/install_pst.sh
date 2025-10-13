@@ -62,24 +62,15 @@ else
     print_log -y "[FILEMANAGER]" -b " :: " "Setting $(xdg-mime query default "inode/directory") as default file explorer..."
 fi
 
-# shell
-"${scrDir}/restore_shl.sh"
+if pkg_installed firefox && pkg_installed xdg-utils; then
+    print_log -c "[BROWSER] " -b "detected :: " "firefox"
+    xdg-mime default firefox.desktop x-scheme-handler/http
+    xdg-mime default firefox.desktop x-scheme-handler/https
+    print_log -g "[BROWSER] " -b " :: " "setting $(xdg-mime query default "x-scheme-handler/http") as default browser..."
+fi
 
-# flatpak
-if ! pkg_installed flatpak; then
-    echo ""
-    print_log -g "[FLATPAK]" -b " list :: " "flatpak application"
-    awk -F '#' '$1 != "" {print "["++count"]", $1}' "${scrDir}/extra/custom_flat.lst"
-    prompt_timer 60 "Install these flatpaks? [Y/n]"
-    fpkopt=${PROMPT_INPUT,,}
-
-    if [ "${fpkopt}" = "y" ]; then
-        print_log -g "[FLATPAK]" -b " install :: " "flatpaks"
-        [ ${flg_DryRun} -eq 1 ] || "${scrDir}/extra/install_fpk.sh"
-    else
-        print_log -y "[FLATPAK]" -b " skip :: " "flatpak installation"
-    fi
-
-else
-    print_log -y "[FLATPAK]" -b " :: " "flatpak is already installed"
+if pkg_installed codium && pkg_installed xdg-utils; then
+    print_log -c "[TEXTEDITOR] " -b "detected :: " "codium"
+    xdg-mime default codium.desktop text/plain
+    print_log -g "[TEXTEDITOR] " -b " :: " "setting $(xdg-mime query default "x-scheme-handler/http") as default text editor..."
 fi

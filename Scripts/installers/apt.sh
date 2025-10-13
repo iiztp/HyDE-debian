@@ -1,3 +1,6 @@
 #!/usr/bin/env bash
 
-sudo apt install $1
+name=$1
+opt=$2
+
+sudo apt install -y ${opt} --force-yes "${name}" &>/dev/null

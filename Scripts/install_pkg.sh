@@ -60,6 +60,23 @@ fi
 IFS=${ofs}
 
 # Install git packages
+listPkg="${1:-"${scrDir}/pkg_wm.lst"}"
+while read -r input; do
+    input="${input// /}"
+    if [ -z "${input}" ]; then
+        continue
+    fi
+
+    name=$(echo "$input" | cut -d':' -f1)
+    script=$(echo "$input" | cut -d':' -f2-)
+    version=$(echo "$input" | cut -d':' -f3-)
+    argument=$(echo "$input" | cut -d':' -f4-)
+
+    echo -e "\033[0;32m[o]\033[0m Installing manually ${name} with ${script}..."
+    ./installers/${script}.sh ${name} ${argument} ${version}
+done < <(cut -d '#' -f 1 "${listPkg}")
+
+# Install extra
 listPkg="${1:-"${scrDir}/install_git.lst"}"
 while read -r input; do
     input="${input// /}"
