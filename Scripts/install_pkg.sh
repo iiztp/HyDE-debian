@@ -80,7 +80,7 @@ while read -r input; do
     argument=$(echo "$input" | cut -d'|' -f4)
 
     echo -e "\033[0;32m[o]\033[0m Installing manually ${name} with ${script}..."
-    ./installers/${script}.sh ${name} ${argument} ${version}
+    bash ./installers/${script}.sh ${name} ${argument} ${version}
 done < <(cut -d '#' -f 1 "${listPkg}")
 
 # Install extra
@@ -94,5 +94,5 @@ while read -r input; do
         continue
     fi
     echo -e "\033[0;32m[o]\033[0m Installing ${input} from script..."
-    ./extra/${input}.sh
+    bash ./extra/${input}.sh
 done < <(cut -d '#' -f 1 "${listPkg}")

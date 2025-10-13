@@ -6,7 +6,7 @@ curl
 flex
 g++
 git
-libcairo-dev
+libcairo2-dev
 libpangocairo-1.0-0
 libpango1.0-dev
 make
