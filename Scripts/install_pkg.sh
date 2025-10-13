@@ -52,7 +52,9 @@ install_from_list $listPkg
 
 # Installing Rust
 if ! pkg_installed "rustup"; then
+    echo ""
     echo -e "\033[0;35m[o]\033[0m Installing Rust..."
+    echo ""
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
     source $HOME/.cargo/env
 else
@@ -62,7 +64,10 @@ fi
 IFS=${ofs}
 
 # Install git packages
-listPkg="${1:-"${scrDir}/pkg_wm.lst"}"
+echo ""
+echo -e "\033[0;35m[o]\033[0m Installing WM packages..."
+echo ""
+listPkg="${scrDir}/pkg_wm.lst"
 while read -r input; do
     input="${input// /}"
     if [ -z "${input}" ]; then
@@ -79,7 +84,10 @@ while read -r input; do
 done < <(cut -d '#' -f 1 "${listPkg}")
 
 # Install extra
-listPkg="${1:-"${scrDir}/pkg_extra.lst"}"
+echo ""
+echo -e "\033[0;35m[o]\033[0m Installing extra packages..."
+echo ""
+listPkg="${scrDir}/pkg_extra.lst"
 while read -r input; do
     input="${input// /}"
     if [ -z "${input}" ]; then
