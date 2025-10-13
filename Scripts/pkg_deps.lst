@@ -22,6 +22,7 @@ parallel
 libdrm-dev
 libgbm-dev
 libdbus-c++-dev
+libsdbus-c++-dev
 libdisplay-info-dev
 libtomlplusplus-dev
 libinput-dev

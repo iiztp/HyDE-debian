@@ -5,7 +5,7 @@ link=$2
 version=$3
 
 if [ ! -d "${name}" ] ; then
-    git clone --depth 1 --recursive ${link} ${name}
+    git clone --depth 1 --branch ${version} --recursive ${link} ${name}
 fi
 
 cd "${name}"
