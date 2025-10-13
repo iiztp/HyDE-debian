@@ -17,6 +17,7 @@ python3-launchpadlib
 software-properties-common
 check
 parallel
+golang
 
 #--------------------------------------------------- // Compilation dependencies
 libdrm-dev
@@ -27,6 +28,7 @@ libdisplay-info-dev
 libtomlplusplus-dev
 libinput-dev
 libgio-2.0-dev
+gir1.2-graphene-1.0
 libgl1-mesa-dev
 libglvnd-core-dev
 libglvnd-dev
