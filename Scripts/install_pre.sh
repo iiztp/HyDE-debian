@@ -47,6 +47,7 @@ if pkg_installed grub-common && [ -f /boot/grub/grub.cfg ]; then
             print_log -g "[bootloader] " -b "set :: " "grub theme // ${grubtheme}"
             echo ""
             # shellcheck disable=SC2154
+            sudo mkdir -p /usr/share/grub/themes/
             [ "${flg_DryRun}" -eq 1 ] || sudo tar -xzf "${cloneDir}/Source/arcs/Grub_${grubtheme}.tar.gz" -C /usr/share/grub/themes/
             [ "${flg_DryRun}" -eq 1 ] || sudo sed -i "/^GRUB_DEFAULT=/c\GRUB_DEFAULT=saved
             /^GRUB_GFXMODE=/c\GRUB_GFXMODE=1280x1024x32,auto
