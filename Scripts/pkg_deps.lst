@@ -35,6 +35,7 @@ libglvnd-core-dev
 libglvnd-dev
 libgtk-layer-shell-dev
 libjxl-dev
+librust-libadwaita-sys-dev
 libpugixml-dev
 libseat-dev
 libmagic-dev
