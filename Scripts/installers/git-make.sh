@@ -9,6 +9,7 @@ if [ ! -d "${name}" ] ; then
 fi
 
 cd "${name}"
+export PATH="$HOME/.cargo/env:$PATH"
 git checkout ${version}
 
 make build
