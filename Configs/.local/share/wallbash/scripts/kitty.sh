@@ -2,7 +2,7 @@
 
 # source variables
 confDir="${confDir:-$HOME/.config}"
-kittyConf="${confDir}/kitty/kitty.conf"
+kittyConf="${confDir}/alacritty/alacritty.toml"
 hydeKitty="${HYDE_DATA_HOME}/kitty.conf"
 
 INC_LINE="include hyde.conf"

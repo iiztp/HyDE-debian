@@ -864,12 +864,12 @@
                     "type": "string"
                 },
                 "terminal": {
-                    "default": "kitty",
+                    "default": "alacritty",
                     "description": "Terminal.",
                     "type": "string"
                 },
                 "quickapps": {
-                    "default": "kitty",
+                    "default": "alacritty",
                     "description": "Quick apps.",
                     "type": "string"
                 },

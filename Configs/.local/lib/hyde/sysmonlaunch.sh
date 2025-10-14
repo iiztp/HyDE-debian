@@ -15,7 +15,7 @@ Config: ~/.config/hyde/config.toml
     [sysmonitor]
     execute = "btop"                    # Default command to execute // accepts executable or app.desktop
     commands = ["btop", "htop", "top"]  # Fallback command options
-    terminal = "kitty"                  # Explicit terminal // uses \$TERMINAL if available
+    terminal = "alacritty"                  # Explicit terminal // uses \$TERMINAL if available
 
 
 This script launches the system monitor application. 

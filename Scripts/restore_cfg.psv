@@ -77,8 +77,8 @@ P|${HOME}/.config|lsd|lsd
 P|${HOME}/.config|fastfetch|fastfetch
 O|${HOME}/.local/share/fastfetch/presets|hyde|fastfetch
 
-S|${HOME}/.config/kitty|hyde.conf theme.conf|kitty
-P|${HOME}/.config/kitty|kitty.conf|kitty
+S|${HOME}/.config/alacritty|hyde.conf theme.conf|alacritty
+P|${HOME}/.config/alacritty|alacritty.toml|alacritty
 
  Shell 
 S|${HOME}/.config/fish|conf.d functions completions|fish

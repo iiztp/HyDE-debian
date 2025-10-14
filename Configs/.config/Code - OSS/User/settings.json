@@ -11,7 +11,7 @@
   "editor.fontFamily": "'JetbrainsMono Nerd Font','Maple Mono', monospace",
     "extensions.autoUpdate": false,
     "workbench.statusBar.visible": false,
-    "terminal.external.linuxExec": "kitty",
+    "terminal.external.linuxExec": "alacritty",
     "terminal.explorerKind": "both",
     "terminal.sourceControlRepositoriesKind": "both",
     "telemetry.telemetryLevel": "off",

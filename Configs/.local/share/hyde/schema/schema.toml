@@ -757,12 +757,12 @@ type      = "object"
     type        = "string"
 
 [properties.hyprland.properties.terminal]
-    default     = "kitty"
+    default     = "alacritty"
     description = "Terminal."
     type        = "string"
 
 [properties.hyprland.properties.quickapps]
-    default     = "kitty"
+    default     = "alacritty"
     description = "Quick apps."
     type        = "string"
 

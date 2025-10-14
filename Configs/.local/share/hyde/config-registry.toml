@@ -19,18 +19,18 @@ path = "${XDG_CONFIG_HOME:-$HOME/.config}/hyde/bookmarks.list"
 
 
 
-[Kitty]
-description = "Kitty Terminal Emulator"
+[alacritty]
+description = "Alacritty Terminal Emulator"
 icon = "🐱"
 
 
 
-# Nested configuration files for kitty
-[Kitty.files.main]
-description = "Main Kitty Configuration"
-path = "${XDG_CONFIG_HOME:-$HOME/.config}/kitty/kitty.conf"
-pre_hook = ["bash", "-c", "echo 'Editing Kitty main config...'"]
-post_hook = ["bash", "-c", "killall -SIGUSR1 kitty || true"]
+# Nested configuration files for alacritty
+[Alacritty.files.main]
+description = "Main Alacritty Configuration"
+path = "${XDG_CONFIG_HOME:-$HOME/.config}/alacritty/alacritty.toml"
+pre_hook = ["bash", "-c", "echo 'Editing Alacritty main config...'"]
+post_hook = ["bash", "-c", "killall -SIGUSR1 alacritty || true"]
 
 [zsh]
 description = "Z Shell Configuration"

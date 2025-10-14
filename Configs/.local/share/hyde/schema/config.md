@@ -130,8 +130,8 @@ Hyprland configuration.
 | lockscreen | Lockscreen. | lockscreen.sh |
 | monospace_font | Monospace font. | CaskaydiaCove Nerd Font Mono |
 | monospace_font_size | Monospace font size. | 9 |
-| quickapps | Quick apps. | kitty |
-| terminal | Terminal. | kitty |
+| quickapps | Quick apps. | alacritty |
+| terminal | Terminal. | alacritty |
 
 ### [hyprland-start]
 
