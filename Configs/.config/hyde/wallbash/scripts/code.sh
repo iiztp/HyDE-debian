@@ -28,7 +28,7 @@ for i in "${!codeVsix[@]}"; do
         *)
             pkg_installed code-insiders && code-insiders --install-extension "${cacheDir}/landing/Code_Wallbash.vsix"
             pkg_installed code && code --install-extension "${cacheDir}/landing/Code_Wallbash.vsix"
-            pkg_installed vscodium && vscodium --install-extension "${cacheDir}/landing/Code_Wallbash.vsix"
+            pkg_installed codium && codium --install-extension "${cacheDir}/landing/Code_Wallbash.vsix"
             echo "[wallbashcode] Installed: in ${codeVsix[i]}"
             ;;
         esac

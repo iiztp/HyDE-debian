@@ -80,6 +80,7 @@ libxkbcommon-dev
 libzip-dev
 uuid-dev
 hwdata
+gir1.2-girepository-2.0-dev
 imagemagick
 scdoc
 wayland-protocols

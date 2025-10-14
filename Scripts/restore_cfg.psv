@@ -65,7 +65,7 @@ O|${HOME}/.local/share|wallbash|bash imagemagick
  Editor 
 P|${HOME}/.config/Code - OSS/User|settings.json|code
 P|${HOME}/.config/Code/User|settings.json|visual-studio-code-bin
-P|${HOME}/.config/VSCodium/User|settings.json|vscodium
+P|${HOME}/.config/VSCodium/User|settings.json|codium
 
  Bar 
 P|${HOME}/.config/waybar|user-style.css config.jsonc theme.css style.css|waybar
@@ -107,7 +107,7 @@ P|${HOME}/.config|libinput-gestures.conf|libinput-gestures
 P|${HOME}/.config|spotify-flags.conf|spotify
 P|${HOME}/.config|code-flags.conf|code
 P|${HOME}/.config|code-flags.conf|visual-studio-code-bin
-P|${HOME}/.config|codium-flags.conf|vscodium
+P|${HOME}/.config|codium-flags.conf|codium
 P|${HOME}/.config|electron-flags.conf|electron
 
  Notifications 

@@ -9,10 +9,8 @@ if [ ! -d "${name}" ] ; then
 fi
 
 cd "${name}"
-export PATH="$HOME/.cargo/env:$PATH"
-git checkout ${version}
 
 make build
-sudo -E make install
+sudo PATH="$PATH:$HOME/.cargo/bin" make install
 
 cd ..

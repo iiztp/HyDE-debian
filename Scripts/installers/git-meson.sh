@@ -9,7 +9,6 @@ if [ ! -d "${name}" ] ; then
 fi
 
 cd "${name}"
-git checkout ${version}
 
 meson build
 ninja -C build

@@ -9,9 +9,7 @@ if [ ! -d "${name}" ] ; then
 fi
 
 cd "${name}"
-git checkout ${version}
 
-export PATH="$HOME/.cargo/env:$PATH"
 cargo build --release
 
 sudo cp ./target/release/* /usr/bin

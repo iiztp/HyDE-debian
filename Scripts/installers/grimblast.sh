@@ -9,7 +9,6 @@ if [ ! -d "${name}" ] ; then
 fi
 
 cd "${name}"
-git checkout ${version}
 cd grimblast
 
 make all
