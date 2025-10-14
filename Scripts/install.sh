@@ -158,6 +158,21 @@ EOF
     # install packages from the list #
     #--------------------------------#
     "${scrDir}/install_pkg.sh" "${scrDir}/install_pkg.lst"
+
+    #--------------------------------#
+    # Change default shell to fish   #
+    #--------------------------------#
+    FISH_PATH="$(command -v fish)"
+
+    # Check if fish is in /etc/shells, add it if not
+    if ! grep -Fxq "$FISH_PATH" /etc/shells; then
+    echo "Adding $FISH_PATH to /etc/shells..."
+    echo "$FISH_PATH" | sudo tee -a /etc/shells > /dev/null
+    fi
+
+    # Change default shell
+    echo "Changing default shell to fish..."
+    chsh -s "$FISH_PATH"
 fi
 
 #---------------------------#
