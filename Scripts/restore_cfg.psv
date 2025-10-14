@@ -103,6 +103,10 @@ S|${HOME}/.local/share|dolphin|dolphin
  Input 
 P|${HOME}/.config|libinput-gestures.conf|libinput-gestures
 
+ Network 
+S|${HOME}/.config/certs|eduroam.pem|nmcli
+S|${HOME}/.config/certs|inria.pem|nmcli
+
  Wayland 
 P|${HOME}/.config|spotify-flags.conf|spotify
 P|${HOME}/.config|code-flags.conf|code

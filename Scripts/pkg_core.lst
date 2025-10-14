@@ -21,6 +21,7 @@ firmware-iwlwifi
 btop
 lm-sensors
 pipx
+wl-clipboard
 
 # --------------------------------------------------- // Dependencies
 # policykit-1-gnome                                      # authentication agent

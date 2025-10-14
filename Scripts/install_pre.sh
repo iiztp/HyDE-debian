@@ -49,11 +49,37 @@ if pkg_installed grub-common && [ -f /boot/grub/grub.cfg ]; then
             # shellcheck disable=SC2154
             sudo mkdir -p /usr/share/grub/themes/
             [ "${flg_DryRun}" -eq 1 ] || sudo tar -xzf "${cloneDir}/Source/arcs/Grub_${grubtheme}.tar.gz" -C /usr/share/grub/themes/
-            [ "${flg_DryRun}" -eq 1 ] || sudo sed -i "/^GRUB_DEFAULT=/c\GRUB_DEFAULT=saved
-            /^GRUB_GFXMODE=/c\GRUB_GFXMODE=1280x1024x32,auto
-            /^GRUB_THEME=/c\GRUB_THEME=\"/usr/share/grub/themes/${grubtheme}/theme.txt\"
-            /^#GRUB_THEME=/c\GRUB_THEME=\"/usr/share/grub/themes/${grubtheme}/theme.txt\"
-            /^#GRUB_SAVEDEFAULT=true/c\GRUB_SAVEDEFAULT=true" /etc/default/grub
+            grubfile="/etc/default/grub"
+            # Update or add GRUB_DEFAULT
+            if grep -q '^GRUB_DEFAULT=' $grubfile; then
+                sudo sed -i 's|^GRUB_DEFAULT=.*|GRUB_DEFAULT=saved|' $grubfile
+            else
+                echo 'GRUB_DEFAULT=saved' | sudo tee -a $grubfile
+            fi
+
+            # Update or add GRUB_GFXMODE
+            if grep -q '^GRUB_GFXMODE=' $grubfile; then
+                sudo sed -i 's|^GRUB_GFXMODE=.*|GRUB_GFXMODE=1280x1024x32,auto|' $grubfile
+            else
+                echo 'GRUB_GFXMODE=1280x1024x32,auto' | sudo tee -a $grubfile
+            fi
+
+            # Update or add GRUB_THEME
+            if grep -q '^GRUB_THEME=' $grubfile; then
+                sudo sed -i "s|^GRUB_THEME=.*|GRUB_THEME=\"/usr/share/grub/themes/${grubtheme}/theme.txt\"|" $grubfile
+            else
+                echo "GRUB_THEME=\"/usr/share/grub/themes/${grubtheme}/theme.txt\"" | sudo tee -a $grubfile
+            fi
+
+            # Update or add GRUB_SAVEDEFAULT
+            if grep -q '^GRUB_SAVEDEFAULT=' $grubfile; then
+                sudo sed -i 's|^GRUB_SAVEDEFAULT=.*|GRUB_SAVEDEFAULT=true|' $grubfile
+            else
+                echo 'GRUB_SAVEDEFAULT=true' | sudo tee -a $grubfile
+            fi
+
+            # Finally, update grub
+            sudo update-grub
             [ "${flg_DryRun}" -eq 1 ] || sudo grub-mkconfig -o /boot/grub/grub.cfg
         fi
 

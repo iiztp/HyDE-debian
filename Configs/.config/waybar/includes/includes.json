@@ -63,6 +63,7 @@
         "/home/khing/.local/share/waybar/modules/custom-power.jsonc",
         "/home/khing/.local/share/waybar/modules/custom-powermenu.jsonc",
         "/home/khing/.local/share/waybar/modules/custom-sensorsinfo.jsonc",
+        "/home/khing/.local/share/waybar/modules/custom-separator.jsonc",
         "/home/khing/.local/share/waybar/modules/custom-spotify.jsonc",
         "/home/khing/.local/share/waybar/modules/custom-theme.jsonc",
         "/home/khing/.local/share/waybar/modules/custom-updates.jsonc",
