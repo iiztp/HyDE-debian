@@ -190,49 +190,21 @@ deploy_psv() {
 	done <"${1}"
 }
 
-ensure_hyq() {
-	# Check if hyq is already available
-	if command -v hyq >/dev/null 2>&1 && [ -x "$(command -v hyq)" ]; then
-		return 0
-	fi
-
-	print_log -y "[hook] " -b "hyprland :: " "'hyq' not found in PATH, trying package install..."
-
-	# Try pm.sh or pacmanCmd if available
-	if [[ -x "${pacmanCmd}" ]]; then
-		"${pacmanCmd}" install --no-confirm hyprquery || "${pacmanCmd}" install --no-confirm hyprquery-git
-	fi
-
-	# Check again if hyq is now available
-	if command -v hyq >/dev/null 2>&1 && [ -x "$(command -v hyq)" ]; then
-		return 0
-	fi
-
-	print_log -r "[error] :: " "Required executable 'hyq' is not available. Install 'hyprquery-git' (or 'hyprquery')."
-	return 1
-}
-
 hyprland_hook() {
 
 	local hyde_config="${cloneDir}/Configs/.config/hypr/hyprland.conf"
 	local hyprland_default_config="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/hyprland.conf"
-	local hyq_exec
 
-	ensure_hyq || return 1
-	hyq_exec="$(command -v hyq 2>/dev/null || true)"
+	mkdir -p "$(dirname "${hyprland_default_config}")" "${BkpDir}/.config/hypr"
+	print_log -g "[hook] " -b "hyprland :: " "No HYDE_HYPRLAND variable found in ${hyprland_default_config}, restoring default HyDE marker..."
 
-	if ! "${hyq_exec}" "${hyprland_default_config}" --query "\$HYDE_HYPRLAND"; then
-		mkdir -p "$(dirname "${hyprland_default_config}")" "${BkpDir}/.config/hypr"
-		print_log -g "[hook] " -b "hyprland :: " "No HYDE_HYPRLAND variable found in ${hyprland_default_config}, restoring default HyDE marker..."
-
-		if [[ ${flg_DryRun} -ne 1 && -f "${hyprland_default_config}" ]]; then
-			cp -f "${hyprland_default_config}" "${BkpDir}/.config/hypr/hyprland.conf"
-		fi
-
-		print_log -r "[backup] :: " "${hyprland_default_config} to ${BkpDir}/.config/hypr/hyprland.conf"
-		[[ ${flg_DryRun} -ne 1 ]] && cp -f "${hyde_config}" "${hyprland_default_config}"
-		print_log -g "[restore] :: " "${hyde_config} to ${hyprland_default_config}"
+	if [[ ${flg_DryRun} -ne 1 && -f "${hyprland_default_config}" ]]; then
+		cp -f "${hyprland_default_config}" "${BkpDir}/.config/hypr/hyprland.conf"
 	fi
+
+	print_log -r "[backup] :: " "${hyprland_default_config} to ${BkpDir}/.config/hypr/hyprland.conf"
+	[[ ${flg_DryRun} -ne 1 ]] && cp -f "${hyde_config}" "${hyprland_default_config}"
+	print_log -g "[restore] :: " "${hyde_config} to ${hyprland_default_config}"
 }
 
 
