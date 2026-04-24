@@ -70,7 +70,8 @@ While installing HyDE alongside another [DE](https://wiki.archlinux.org/title/De
 For NixOS support there is a separate project being maintained @ [Hydenix](https://github.com/richen604/hydenix/tree/main)
 
 > [!IMPORTANT]
-> The install script will auto-detect an NVIDIA card and install nvidia-dkms drivers for your kernel.
+> The install script will auto-detect an NVIDIA card and install nvidia-open-dkms drivers for your kernel.
+> For legacy cards [check this first](./Scripts/nvidia-db/)
 > Please ensure that your NVIDIA card supports dkms drivers in the list provided [here](https://wiki.archlinux.org/title/NVIDIA).
 
 > [!CAUTION]
@@ -79,7 +80,7 @@ For NixOS support there is a separate project being maintained @ [Hydenix](https
 To install, execute the following commands:
 
 ```shell
-pacman -S --needed git base-devel
+sudo pacman -S --needed git base-devel
 git clone --depth 1 https://github.com/HyDE-Project/HyDE ~/HyDE
 cd ~/HyDE/Scripts
 ./install.sh
@@ -141,9 +142,13 @@ Whether you're helping with code, testing, or documentation, we appreciate your 
 
 To update HyDE, you will need to pull the latest changes from GitHub and restore the configs by running the following commands:
 
+> [!WARNING]
+> The following commands will discard any uncommitted local changes in the repository.
+
 ```shell
 cd ~/HyDE/Scripts
-git pull origin master
+git fetch --update-shallow --depth 1 origin master
+git reset --hard origin/master
 ./install.sh -r
 ```
 
@@ -281,16 +286,10 @@ For more information, visit [HyDE-Project/hyde-themes](https://github.com/HyDE-P
 
 <a id="star_history"></a>
 <img src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=25&pause=1000&color=CCA9DD&vCenter=true&width=435&height=25&lines=STARS" width="450"/>
+                        
+[![Stargazers over time](https://starchart.cc/HyDE-Project/HyDE.svg?background=%231f2226&axis=%23ebbcba&line=%23c79bf0)](https://starchart.cc/HyDE-Project/HyDE)
 
----
-
-<a href="https://star-history.com/#hyde-project/hyde&hyde-project/hyde-gallery&hyde-project/hyde-themes&Timeline">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=hyde-project/hyde&type=Timeline&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=hyde-project/hyde&type=Timeline" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=hyde-project/hyde&type=Timeline" />
- </picture>
-</a>
+                    
 
 ---
 

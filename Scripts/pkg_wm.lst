@@ -8,11 +8,12 @@ hyprcursor|git-cmake|v0.1.13|https://github.com/hyprwm/hyprcursor.git
 hyprpicker|git-cmake|v0.4.6|https://github.com/hyprwm/hyprpicker.git
 hyprwire|git-cmake|v0.3.0|https://github.com/hyprwm/hyprwire.git
 aquamarine|git-cmake|v0.10.0|https://github.com/hyprwm/aquamarine.git
-#hyprland|git-cmake|v0.54.3|https://github.com/hyprwm/hyprland.git
+hyprland|git-cmake|v0.54.3|https://github.com/hyprwm/hyprland.git
+hyprsunset|git-cmake|v0.3.3|https://github.com/hyprwm/hyprsunset.git
 hyprlock|git-cmake|v0.9.5|https://github.com/hyprwm/hyprlock.git
 dunst|apt||
 waybar|apt||
-swww|git-rust|v0.11.2|https://github.com/LGFae/swww.git
+awww|git-rust|v0.12.0|https://codeberg.org/LGFae/awww.git
 wlogout|apt||
 grim|git-meson|v1.5.0|https://gitlab.freedesktop.org/emersion/grim.git
 grimblast|grimblast|main|https://github.com/hyprwm/contrib.git

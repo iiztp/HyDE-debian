@@ -24,7 +24,7 @@ pipx
 wl-clipboard
 
 # --------------------------------------------------- // Dependencies
-# policykit-1-gnome                                      # authentication agent
+hyprpolkitagent                                        # authentication agent
 xdg-desktop-portal-hyprland                            # xdg desktop portal for hyprland
 xdg-user-dirs                                          # Manage user directories like ~/Desktop and ~/Music
 parallel                                               # for parallel processing

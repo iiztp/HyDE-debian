@@ -98,7 +98,7 @@ if [[ -z $1 || -z $2 ]]; then
 fi
 
 wallbashDirs=(
-    "${XDG_CONFIG_HOME:-$HOME.config}/hyde/wallbash"
+    "${XDG_CONFIG_HOME:-$HOME/.config}/hyde/wallbash"
     "${XDG_DATA_HOME:-$HOME/.local/share}/hyde/wallbash"
     "${XDG_DATA_HOME}/wallbash"
     "${XDG_DATA_HOME}/hyde/wallbash"
@@ -347,7 +347,7 @@ echo -en "${restore_list}" >"${Theme_Dir}/restore_cfg.lst"
 print_prompt -g "\n[exec] " "restore_cfg.sh \"${Theme_Dir}/restore_cfg.lst\" \"${Theme_Dir}/Configs\" \"${Fav_Theme}\"\n"
 "${scrDir}/restore_cfg.sh" "${Theme_Dir}/restore_cfg.lst" "${Theme_Dir}/Configs" "${Fav_Theme}" &>/dev/null
 if [ "${3}" != "--skipcaching" ]; then
-    "$HOME/.local/lib/hyde/swwwallcache.sh" -t "${Fav_Theme}"
+    "$HOME/.local/lib/hyde/wallpaper/cache.sh" commence -t "${Fav_Theme}"
     "$HOME/.local/lib/hyde/theme.switch.sh"
 fi
 

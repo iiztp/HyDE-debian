@@ -6,26 +6,19 @@ import sys
 from dataclasses import dataclass
 from signal import SIGINT, SIGTERM, signal
 from threading import Event, Thread
-import os
 import argparse
 import time
 
-lib_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, lib_dir)
+import pyutils.logger  
 
-import pyutils.logger  # noqa: E402
-import pyutils.pip_env as pip_env  # noqa: E402
-
-pip_env.v_import("pywayland")  # noqa: E402
-pip_env.v_import("pulsectl")  # noqa: E402
-import pulsectl  # noqa: E402
-from pywayland.client.display import Display  # noqa: E402
-from pywayland.protocol.idle_inhibit_unstable_v1.zwp_idle_inhibit_manager_v1 import (  # noqa: E402
+import pulsectl  
+from pywayland.client.display import Display  
+from pywayland.protocol.idle_inhibit_unstable_v1.zwp_idle_inhibit_manager_v1 import (  
     ZwpIdleInhibitManagerV1,
 )
-from pywayland.protocol.wayland.wl_compositor import WlCompositor  # noqa: E402
-from pywayland.protocol.wayland.wl_registry import WlRegistryProxy  # noqa: E402
-from pywayland.protocol.wayland.wl_surface import WlSurface  # noqa: E402
+from pywayland.protocol.wayland.wl_compositor import WlCompositor  
+from pywayland.protocol.wayland.wl_registry import WlRegistryProxy  
+from pywayland.protocol.wayland.wl_surface import WlSurface  
 
 logger = pyutils.logger.get_logger()  # Initialize logger
 
@@ -47,9 +40,7 @@ def handle_registry_global(
         global_registry.surface = compositor.create_surface()  # type: ignore
         logger.debug("Compositor and surface created")
     elif iface_name == "zwp_idle_inhibit_manager_v1":
-        global_registry.inhibit_manager = wl_registry.bind(
-            id_num, ZwpIdleInhibitManagerV1, version
-        )
+        global_registry.inhibit_manager = wl_registry.bind(id_num, ZwpIdleInhibitManagerV1, version)
         logger.debug("Idle inhibit manager created")
 
 
@@ -80,9 +71,7 @@ def audio_listener(done: Event, audio_playing_signal: Event) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Idle inhibitor")
     parser.add_argument("--all", action="store_true", help="Inhibit idle for all cases")
-    parser.add_argument(
-        "--audio", action="store_true", help="Inhibit idle when there is audio"
-    )
+    parser.add_argument("--audio", action="store_true", help="Inhibit idle when there is audio")
     args = parser.parse_args()
 
     done = Event()
@@ -119,7 +108,7 @@ def main() -> None:
     inhibitor = None
 
     if args.all:
-        inhibitor = global_registry.inhibit_manager.create_inhibitor(  # type: ignore
+        inhibitor = global_registry.inhibit_manager.create_inhibitor(
             global_registry.surface
         )
         logger.debug("Inhibiting idle for all cases")
@@ -137,7 +126,7 @@ def main() -> None:
             if audio_playing_signal.is_set():
                 if inhibitor is None:
                     logger.debug("Creating inhibitor due to audio")
-                    inhibitor = global_registry.inhibit_manager.create_inhibitor(  # type: ignore
+                    inhibitor = global_registry.inhibit_manager.create_inhibitor(
                         global_registry.surface
                     )
                     display.dispatch()
@@ -156,7 +145,6 @@ def main() -> None:
                     inhibitor = None
                     logger.debug("Stopped inhibiting idle due to no audio")
                     print("Stopped inhibiting idle due to no audio")
-                    shutdown()
 
             time.sleep(1)
 
