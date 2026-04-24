@@ -461,9 +461,6 @@ export BIN_DIR LIB_DIR SHARE_DIR PATH HYDE_SCRIPTS_PATH
 # Priority commands
 case "$1" in
 app)
-    export PATH="${HYDE_SCRIPTS_PATH}:${PATH}"
-    [[ "${HYDEPY}" -eq 1 ]]
-    shift
     exec app2unit.sh "$@"
     ;;
 init | --init)
